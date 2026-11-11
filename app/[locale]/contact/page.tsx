@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { ContactForm } from "@/components/site/contact-form";
+import { WhatsAppContact } from "@/components/site/whatsapp-contact";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata() {
@@ -25,7 +25,7 @@ export default async function ContactPage() {
         </p>
       </div>
       <div className="mt-10">
-        <ContactForm />
+        <WhatsAppContact />
       </div>
     </div>
   );

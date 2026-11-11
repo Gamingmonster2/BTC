@@ -103,6 +103,13 @@ export function PrimerTm() {
             />
           </div>
 
+          {!result.wallaceReliable && (
+            <Alert>
+              <AlertTitle>{t("results.wallaceWarningTitle")}</AlertTitle>
+              <AlertDescription>{t("results.wallaceWarning")}</AlertDescription>
+            </Alert>
+          )}
+
           <Card>
             <CardHeader>
               <CardTitle className="text-sm font-medium">
@@ -142,6 +149,9 @@ export function PrimerTm() {
             </CardHeader>
             <CardContent>
               <p className="text-xs text-muted-foreground">
+                {t("results.gcClampStrength", { count: result.gcClampCount })}
+              </p>
+              <p className="mt-3 text-xs text-muted-foreground">
                 {t("results.reverseComplement")}
               </p>
               <div className="mt-2 flex items-center gap-2">

@@ -21,9 +21,12 @@ import {
   isValidDna,
   analyzeDna,
   type DnaAnalysis,
+  type ReadingFrame,
 } from "@/lib/bio/dna";
 
 type ErrorKey = "empty" | "invalid" | "tooShort";
+
+const FRAMES: ReadingFrame[] = [1, 2, 3];
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
@@ -59,6 +62,7 @@ function SequenceBlock({
 export function DnaAnalyzer() {
   const t = useTranslations("dna");
   const [input, setInput] = useState("");
+  const [frame, setFrame] = useState<ReadingFrame>(1);
   const [error, setError] = useState<ErrorKey | null>(null);
   const [result, setResult] = useState<DnaAnalysis | null>(null);
 
@@ -80,7 +84,12 @@ export function DnaAnalyzer() {
       return;
     }
     setError(null);
-    setResult(analyzeDna(seq));
+    setResult(analyzeDna(seq, frame));
+  }
+
+  function changeFrame(next: ReadingFrame) {
+    setFrame(next);
+    if (result) setResult(analyzeDna(result.sequence, next));
   }
 
   function clear() {
@@ -134,7 +143,7 @@ export function DnaAnalyzer() {
             />
             <Stat
               label={t("results.molecularWeight")}
-              value={`${result.molecularWeight.toLocaleString()} g/mol`}
+              value={`${result.molecularWeightSs.toLocaleString()} g/mol`}
             />
           </div>
 
@@ -173,7 +182,26 @@ export function DnaAnalyzer() {
             value={result.reverseComplement}
           />
           <SequenceBlock label={t("results.transcription")} value={result.mrna} />
-          <SequenceBlock label={t("results.translation")} value={result.protein} />
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm font-medium">{t("frameLabel")}</span>
+              {FRAMES.map((f) => (
+                <Button
+                  key={f}
+                  type="button"
+                  size="sm"
+                  variant={result.frame === f ? "default" : "outline"}
+                  onClick={() => changeFrame(f)}
+                >
+                  +{f}
+                </Button>
+              ))}
+            </div>
+            <SequenceBlock
+              label={`${t("results.translation")} · ${t("frameLabel")} +${result.frame}`}
+              value={result.protein}
+            />
+          </div>
         </div>
       )}
     </div>

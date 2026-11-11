@@ -21,9 +21,13 @@ export interface PrimerAnalysis {
    * Tm = 81.5 + 16.6*log10([Na+]) + 0.41*(%GC) - 675/length
    */
   tmSaltAdjusted: number;
+  /** The Wallace rule is only reliable for primers 14–20 nt long. */
+  wallaceReliable: boolean;
   reverseComplement: string;
   /** True when the primer ends (3' end) with G or C. */
   gcClamp: boolean;
+  /** Number of G/C bases among the last five 3' bases (0–5). */
+  gcClampCount: number;
 }
 
 /** Normalize an input to uppercase DNA with whitespace/digits removed. */
@@ -38,9 +42,14 @@ export function tmBasic(sequence: string): number {
 }
 
 /**
- * Salt-adjusted melting temperature for short primers (default 50 mM monovalent Na+).
- * Formula (Howley et al. / OligoCalc basis):
- * Tm = 81.5 + 16.6*log10([Na+]) + 0.41*(%GC) - 675/length
+ * Salt-adjusted melting temperature for short primers.
+ *
+ * Howley et al. (1979) / OligoCalc form, with the ionic-strength correction
+ * [Na+] / (1 + 0.7 [Na+]) and the 500/N term used for oligonucleotides:
+ *
+ *   Tm = 81.5 + 16.6*log10([Na+]/(1+0.7[Na+])) + 0.41*(%GC) - 500/N
+ *
+ * @param saltConcentration monovalent cation concentration in mol/L (default 50 mM)
  */
 export function tmSaltAdjusted(
   sequence: string,
@@ -49,8 +58,10 @@ export function tmSaltAdjusted(
   const length = sequence.length;
   if (length === 0) return 0;
   const gc = gcContent(sequence);
-  const logSalt = Math.log10(saltConcentration);
-  return 81.5 + 16.6 * logSalt + 0.41 * gc - 675 / length;
+  const correctedSalt = saltConcentration / (1 + 0.7 * saltConcentration);
+  return (
+    81.5 + 16.6 * Math.log10(correctedSalt) + 0.41 * gc - 500 / length
+  );
 }
 
 /** True when the primer's 3' end is a G or C (GC clamp). */
@@ -58,6 +69,20 @@ export function hasGcClamp(sequence: string): boolean {
   if (sequence.length === 0) return false;
   const last = sequence[sequence.length - 1];
   return last === "G" || last === "C";
+}
+
+/** Number of G/C bases among the last five 3' bases (GC clamp strength). */
+export function gcClampCount(sequence: string): number {
+  let count = 0;
+  for (const base of sequence.slice(-5)) {
+    if (base === "G" || base === "C") count++;
+  }
+  return count;
+}
+
+/** The Wallace rule is only reliable for primers between 14 and 20 nt. */
+export function isWallaceReliable(sequence: string): boolean {
+  return sequence.length >= 14 && sequence.length <= 20;
 }
 
 /** Full primer analysis. Expects an already-sanitized, validated sequence. */
@@ -69,8 +94,10 @@ export function analyzePrimer(sequence: string): PrimerAnalysis {
     gcPercent: gcContent(sequence),
     tmBasic: tmBasic(sequence),
     tmSaltAdjusted: tmSaltAdjusted(sequence),
+    wallaceReliable: isWallaceReliable(sequence),
     reverseComplement: reverseComplement(sequence),
     gcClamp: hasGcClamp(sequence),
+    gcClampCount: gcClampCount(sequence),
   };
 }
 

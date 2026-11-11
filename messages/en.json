@@ -25,7 +25,8 @@
     "closeMenu": "Close menu",
     "loading": "Loading…",
     "comingSoon": "Coming soon",
-    "tryTool": "Try the tool"
+    "tryTool": "Try the tool",
+    "readGuide": "Read the full tool guide"
   },
   "home": {
     "badge": "Open bioinformatics platform",
@@ -93,6 +94,7 @@
     "inputPlaceholder": "Example: ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG",
     "analyze": "Analyze",
     "clear": "Clear",
+    "frameLabel": "Reading frame",
     "errors": {
       "title": "Error",
       "empty": "Please enter a DNA sequence.",
@@ -105,12 +107,11 @@
       "bases": "Base counts",
       "gcContent": "GC content",
       "atGc": "AT / GC ratio",
-      "molecularWeight": "Approximate molecular weight",
+      "molecularWeight": "Molecular weight (single strand)",
       "reverseComplement": "Reverse complement",
       "transcription": "Transcription to RNA (mRNA)",
       "translation": "Translation to protein",
-      "basesUnit": "bp",
-      "readingFrame": "Reading frame (5' to 3')"
+      "basesUnit": "bp"
     }
   },
   "primer": {
@@ -137,14 +138,21 @@
       "gcClamp": "3' end (GC clamp)",
       "gcClampYes": "Ends with G or C",
       "gcClampNo": "Does not end with G or C",
+      "gcClampStrength": "G/C bases in the last five bases: {count}",
+      "wallaceWarningTitle": "The 2+4 rule is unreliable at this length",
+      "wallaceWarning": "The Wallace rule is only valid for primers between 14 and 20 bases. Your primer is outside that range, so rely on the salt-adjusted value instead.",
       "note": "Note: these values are estimates for educational purposes. For laboratory-grade accuracy, use specialized software such as Primer3 or OligoCalc."
     }
   },
   "learn": {
     "title": "Learn",
     "subtitle": "Arabic educational content in bioinformatics and AI applications.",
-    "badge": "In preparation",
-    "intro": "We are currently preparing a series of Arabic lessons and articles covering: bioinformatics fundamentals, sequence analysis, biological databases, and AI applications in biology.",
+    "badge": "Articles & guides",
+    "intro": "We publish articles that explain the tools we build: where every number comes from, and when it should not be trusted. Every article links internally to the tool it explains.",
+    "articlesTitle": "Articles",
+    "readingTime": "{minutes} min read",
+    "backToLearn": "Back to Learn",
+    "toolArticle": "Tool article",
     "topicsTitle": "Upcoming topics",
     "topics": [
       "Introduction to bioinformatics",
@@ -156,16 +164,25 @@
   },
   "contact": {
     "title": "Contact us",
-    "subtitle": "We welcome your questions, suggestions, and contributions.",
-    "name": "Name",
-    "namePlaceholder": "Your full name",
-    "email": "Email",
-    "emailPlaceholder": "you@example.com",
-    "message": "Message",
+    "subtitle": "Feedback on a tool, a bug you found, an article suggestion, or an offer to contribute — message us directly on WhatsApp.",
+    "numberLabel": "WhatsApp number",
+    "whatsappNote": "Tap the number or use the form below to send a ready-made message.",
+    "templatesLabel": "Ready-made message templates",
+    "templates": [
+      "I have feedback on a tool:",
+      "I would like to suggest a new tool:",
+      "I would like to suggest an article topic:",
+      "I would like to contribute to the platform:"
+    ],
+    "message": "Your message",
     "messagePlaceholder": "Write your message here…",
-    "submit": "Send via email",
-    "note": "When you click send, your email app will open with a pre-filled message.",
-    "success": "Thank you for reaching out!"
+    "submit": "Send via WhatsApp",
+    "openWhatsapp": "Open WhatsApp",
+    "note": "WhatsApp opens in a new tab with your message ready to send. Nothing is sent automatically."
+  },
+  "comments": {
+    "title": "Comments",
+    "note": "Comments are powered by GitHub Discussions. You need a GitHub account to take part."
   },
   "footer": {
     "description": "An open platform for bioinformatics tools and content in Arabic and English.",

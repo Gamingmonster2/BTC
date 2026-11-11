@@ -97,31 +97,38 @@ const CODON_TABLE: Record<string, string> = {
   GGT: "G", GGC: "G", GGA: "G", GGG: "G",
 };
 
+export type ReadingFrame = 1 | 2 | 3;
+
 /**
  * Translate a DNA sequence to a protein sequence.
- * Translation starts at the first base and reads consecutive codons.
  * The codon table is keyed by DNA codons, so the input must stay as DNA
  * (U is normalized to T to also accept RNA input).
+ *
+ * `frame` selects the first base of the first codon (1, 2 or 3). Trailing bases
+ * that do not form a complete codon are ignored; a stop codon is shown as `*`.
  */
-export function translate(sequence: string): string {
+export function translate(sequence: string, frame: ReadingFrame = 1): string {
   const dna = sequence.replace(/U/g, "T");
   let protein = "";
-  for (let i = 0; i + 3 <= dna.length; i += 3) {
+  for (let i = frame - 1; i + 3 <= dna.length; i += 3) {
     const codon = dna.slice(i, i + 3);
     protein += CODON_TABLE[codon] ?? "X";
   }
   return protein;
 }
 
-/** Rough approximate molecular weight of a double-stranded DNA sequence (g/mol). */
-export function molecularWeightDs(sequence: string): number {
-  const counts = countBases(sequence);
-  const total = sequence.length;
-  if (total === 0) return 0;
-  // Average base pair weight ~ 650 g/mol; adjusted slightly by GC content.
-  const gc = counts.G + counts.C;
-  const at = counts.A + counts.T;
-  return Math.round(gc * 618.2 + at * 617.4 + 36.04);
+/**
+ * Molecular weight of a single-stranded DNA sequence (g/mol).
+ * Standard residue masses (Sambrook & Russell):
+ *   A 313.21, T 304.20, G 329.21, C 289.18, minus 61.96 for the 5' phosphate.
+ * Ambiguity codes are ignored. A double-stranded molecule weighs roughly twice
+ * as much.
+ */
+export function molecularWeightSs(sequence: string): number {
+  const c = countBases(sequence);
+  const mass =
+    c.A * 313.21 + c.T * 304.2 + c.G * 329.21 + c.C * 289.18 - 61.96;
+  return Math.max(0, Math.round(mass));
 }
 
 export interface DnaAnalysis {
@@ -132,11 +139,15 @@ export interface DnaAnalysis {
   reverseComplement: string;
   mrna: string;
   protein: string;
-  molecularWeight: number;
+  frame: ReadingFrame;
+  molecularWeightSs: number;
 }
 
 /** Run the full DNA analysis pipeline on a sanitized, validated sequence. */
-export function analyzeDna(sequence: string): DnaAnalysis {
+export function analyzeDna(
+  sequence: string,
+  frame: ReadingFrame = 1
+): DnaAnalysis {
   return {
     sequence,
     length: sequence.length,
@@ -144,7 +155,8 @@ export function analyzeDna(sequence: string): DnaAnalysis {
     gcPercent: gcContent(sequence),
     reverseComplement: reverseComplement(sequence),
     mrna: transcribe(sequence),
-    protein: translate(sequence),
-    molecularWeight: molecularWeightDs(sequence),
+    protein: translate(sequence, frame),
+    frame,
+    molecularWeightSs: molecularWeightSs(sequence),
   };
 }

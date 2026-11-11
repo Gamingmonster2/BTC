@@ -30,12 +30,16 @@ This distinction is intentional and is stated on the public About page.
 - Bilingual site: Arabic (`/ar`, RTL) and English (`/en`, LTR), with locale-aware
   navigation, language switcher, and `hreflang` alternates.
 - **DNA sequence analyzer** — base counts, GC content, reverse complement,
-  transcription to mRNA, translation to protein, approximate molecular weight.
-- **Primer Tm calculator** — length, GC content, Wallace (2+4) Tm, salt-adjusted Tm,
-  reverse complement, GC clamp check.
-- Honest About page, Learn section scaffold, contact form.
-- SEO: per-page metadata, canonical URLs, `hreflang`, `sitemap.xml`, `robots.txt`,
-  localized 404 pages.
+  transcription to mRNA, translation to protein in all three reading frames, and
+  single-stranded molecular weight.
+- **Primer Tm calculator** — length, GC content, Wallace (2+4) Tm with a validity
+  warning, salt-adjusted Tm, reverse complement, and GC clamp strength.
+- **Learn articles** — bilingual articles stored as structured TypeScript blocks,
+  each internally linked to the tool it explains.
+- **WhatsApp contact** — the number plus ready-made message templates (no server-side
+  form, no stored messages).
+- Honest About page, SEO metadata, canonical URLs, `hreflang`, `sitemap.xml`,
+  `robots.txt`, and localized 404 pages.
 
 All sequence analysis runs client-side; no sequence data leaves the browser.
 
@@ -62,16 +66,43 @@ app/
   robots.ts, sitemap.ts
   global-not-found.tsx
 components/
-  site/                header, footer, theme + language switchers, contact form
+  articles/            article body renderer (structured blocks)
+  site/                header, footer, theme + language switchers, WhatsApp contact
   tools/               interactive bioinformatics tools
   ui/                  shadcn/ui components
 i18n/                  routing, request config, navigation wrappers
 lib/
+  articles/            article content (AR + EN) and registry
   bio/                 pure bioinformatics logic (DNA, primer)
   metadata.ts, site.ts
 messages/              ar.json, en.json
 proxy.ts               next-intl locale middleware (Next.js `proxy` convention)
 ```
+
+## Adding an article
+
+1. Create `lib/articles/<slug>.ts` exporting an `Article` (see `lib/articles/types.ts`).
+2. Register it in `lib/articles/index.ts`.
+3. It is then available at `/<locale>/learn/<slug>`, listed on `/<locale>/learn`,
+   and included in `sitemap.xml` automatically. Set `tool` to link the article to a
+   tool page in both directions.
+
+## Comments (opt-in)
+
+Article pages render a Giscus (GitHub Discussions) comment box only when all four
+public variables are set at build time:
+
+| Variable | Example |
+| --- | --- |
+| `NEXT_PUBLIC_GISCUS_REPO` | `Gamingmonster2/BTC` |
+| `NEXT_PUBLIC_GISCUS_REPO_ID` | from <https://giscus.app> |
+| `NEXT_PUBLIC_GISCUS_CATEGORY` | `Comments` |
+| `NEXT_PUBLIC_GISCUS_CATEGORY_ID` | from <https://giscus.app> |
+
+Setup: make the repository public, install the giscus GitHub App, enable Discussions,
+create a `Comments` category (Announcements type), then copy the IDs from giscus.app.
+Without the variables the component renders nothing. Note that readers need a GitHub
+account to comment, which is a real barrier for a general Arabic audience.
 
 ## Deployment (Cloudflare Workers)
 
@@ -104,12 +135,22 @@ fix ships in a stable `@opennextjs/cloudflare` release.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | `https://btc.org.ly` | Canonical origin used in metadata, sitemap and robots |
+| `NEXT_PUBLIC_GISCUS_*` | unset | Enables article comments (see above) |
 
 ## Accuracy notes
 
-Tool outputs are educational estimates. The primer Tm formulas are simplified
-(Wallace rule and a salt-adjusted approximation at 50 mM Na⁺). For laboratory-grade
-design, use dedicated software such as Primer3 or OligoCalc.
+Tool outputs are educational estimates.
+
+- **Molecular weight** uses standard single-stranded residue masses (A 313.21,
+  T 304.20, G 329.21, C 289.18, minus 61.96 for the terminal phosphate). Double-stranded
+  DNA weighs roughly twice as much; ambiguity codes are not counted.
+- **Primer Tm** uses the Wallace rule (valid only for 14–20 nt, and the UI warns
+  otherwise) and the Howley/OligoCalc salt-adjusted form with the `500/N` term at 50 mM
+  Na⁺. A nearest-neighbor model is deliberately not implemented yet, because a
+  half-correct implementation would be worse than an honest approximation. For
+  laboratory-grade design, use dedicated software such as Primer3 or OligoCalc.
+- **Translation** uses the standard genetic code and ignores mitochondrial or
+  bacterial code variants. Ambiguous codons become `X`; stop codons become `*`.
 
 ## License
 
