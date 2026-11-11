@@ -73,6 +73,32 @@ messages/              ar.json, en.json
 proxy.ts               next-intl locale middleware (Next.js `proxy` convention)
 ```
 
+## Deployment (Cloudflare Workers)
+
+This app is **not** a static site: it uses Server Components and middleware (`proxy.ts`),
+so it cannot be deployed as Cloudflare Pages static assets. It deploys as a
+**Cloudflare Worker** through the OpenNext adapter.
+
+```bash
+npm run preview   # build + run the Worker locally on http://localhost:8787
+npm run deploy    # build + deploy to Cloudflare
+```
+
+- Build command: `npx opennextjs-cloudflare build`
+- Deploy command: `npx wrangler deploy`
+- Output: `.open-next/` (`worker.js` + `assets/`)
+- Node.js: 22.x
+- Config: `wrangler.jsonc`, `open-next.config.ts`
+
+### Why `cacheComponents` is disabled
+
+`next.config.ts` does not enable `cacheComponents` / `partialPrefetching`. OpenNext for
+Cloudflare 1.20.x does not yet run Cache Components staged renders correctly on workerd:
+the middleware bundle loads first and records the native `setImmediate`, so the
+Cache Components scheduler never takes effect and any page rendered at request time
+hangs with *"the Worker's code had hung"*. Re-enable only after the upstream scheduler
+fix ships in a stable `@opennextjs/cloudflare` release.
+
 ## Configuration
 
 | Variable | Default | Purpose |

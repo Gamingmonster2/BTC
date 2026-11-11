@@ -1,14 +1,10 @@
 import { getTranslations } from "next-intl/server";
-import { cacheLife } from "next/cache";
 import { DnaIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
-// The copyright year only needs to change on a new deployment.
-async function getCurrentYear() {
-  "use cache";
-  cacheLife("max");
-  return new Date().getFullYear();
-}
+// Evaluated at build time: pages are statically prerendered, so the year is
+// baked into the HTML and only changes on a new deployment.
+const CURRENT_YEAR = new Date().getFullYear();
 
 const FOOTER_NAV = [
   { key: "home", href: "/" },
@@ -28,7 +24,7 @@ export async function SiteFooter() {
   const nav = await getTranslations("nav");
   const brand = await getTranslations("brand");
   const tools = await getTranslations("tools");
-  const year = await getCurrentYear();
+  const year = CURRENT_YEAR;
 
   return (
     <footer className="border-t">

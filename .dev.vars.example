@@ -1,0 +1,4 @@
+# Local development variables for `opennextjs-cloudflare preview`.
+# Copy to `.dev.vars` and fill in real values. Never commit `.dev.vars`.
+NEXTJS_ENV=development
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
