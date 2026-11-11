@@ -1,0 +1,18 @@
+# Sponsor button configuration.
+# Docs: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# GitHub Sponsors (the account must be enrolled first):
+github: [Gamingmonster2]
+
+# Other platforms — uncomment the ones you actually use and replace the handle.
+# ko_fi: your-handle
+# liberapay: your-handle
+# patreon: your-handle
+# open_collective: your-handle
+# buy_me_a_coffee: your-handle
+# tidelift: npm/package-name
+# polar: your-handle
+# thanks_dev: u/gh/your-handle
+
+# Up to four custom links (must be https).
+custom: ["https://btc.org.ly/ar/contact"]

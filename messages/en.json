@@ -13,7 +13,8 @@
     "about": "About",
     "tools": "Tools",
     "learn": "Learn",
-    "contact": "Contact"
+    "contact": "Contact",
+    "sitemap": "Sitemap"
   },
   "common": {
     "language": "Language",
@@ -66,9 +67,18 @@
     "transparencyText": "We are not a wet lab and we do not claim to run laboratory experiments. We are a software team focused on the computational side: software, algorithms, and digital education. This transparency is the foundation of our credibility.",
     "valuesTitle": "Our values",
     "values": [
-      { "title": "Open source", "description": "We share the code of our tools and methodologies with the community." },
-      { "title": "Scientific accuracy", "description": "We rely on trusted scientific sources and methodologies." },
-      { "title": "Arabic localization", "description": "We are committed to making scientific knowledge available in Arabic." }
+      {
+        "title": "Open source",
+        "description": "We share the code of our tools and methodologies with the community."
+      },
+      {
+        "title": "Scientific accuracy",
+        "description": "We rely on trusted scientific sources and methodologies."
+      },
+      {
+        "title": "Arabic localization",
+        "description": "We are committed to making scientific knowledge available in Arabic."
+      }
     ]
   },
   "tools": {
@@ -195,5 +205,20 @@
     "title": "Page not found",
     "description": "The link you requested is unavailable or has moved. You can return to the home page or explore the tools.",
     "backHome": "Back to home"
+  },
+  "sitemap": {
+    "badge": "Site guide",
+    "title": "Sitemap",
+    "subtitle": "Every page on the BTC platform in one place, grouped by section.",
+    "intro": "Use this page for quick navigation or to see what is available right now. Every tool has a page, and every article links to the tool it explains.",
+    "sections": {
+      "pages": "Main pages",
+      "tools": "Tools",
+      "articles": "Articles",
+      "technical": "Technical files"
+    },
+    "xml": "Search-engine sitemap (XML)",
+    "robots": "robots.txt file",
+    "note": "The XML sitemap is the machine-readable version. Search engines read sitemap.xml; this page is for people."
   }
 }

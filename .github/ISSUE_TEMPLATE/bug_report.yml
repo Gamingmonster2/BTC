@@ -1,0 +1,64 @@
+name: تقرير خطأ / Bug report
+description: أداة تعطي نتيجة خاطئة، صفحة لا تعمل، أو مشكلة في الواجهة.
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        شكراً لمساعدتك في تحسين المنصة. املأ الحقول التالية بأكبر قدر ممكن من الدقة.
+        **لا تضع معلومات شخصية أو بيانات مرضى أو تسلسلات غير منشورة.**
+
+  - type: input
+    id: page
+    attributes:
+      label: الصفحة أو الأداة
+      description: رابط الصفحة التي ظهرت فيها المشكلة.
+      placeholder: https://btc.org.ly/ar/tools/dna-analyzer
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: خطوات إعادة المشكلة
+      description: ماذا فعلت بالترتيب؟
+      placeholder: |
+        1. أدخلت التسلسل ATG...
+        2. ضغطت "تحليل"
+        3. ظهرت النتيجة...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: النتيجة المتوقعة
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: النتيجة الفعلية
+      description: انسخ الرقم أو النص الذي ظهر، أو أرفق صورة.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: المتصفح والجهاز
+      placeholder: Chrome 131 على Android / Safari على iPhone
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: تأكيد
+      options:
+        - label: بحثت في Issues الموجودة ولم أجد نفس المشكلة.
+          required: true
+        - label: هذه مشكلة في البرنامج وليست طلب دعم علمي أو استشارة مخبرية.
+          required: true

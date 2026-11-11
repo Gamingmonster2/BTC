@@ -1,10 +1,23 @@
 # BTC — Bioinformatics & AI for the Life Sciences
 
+[![Live](https://img.shields.io/badge/live-btc.org.ly-0ea5e9)](https://btc.org.ly/ar)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06b6d4)](https://tailwindcss.com)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-f38020)](https://workers.cloudflare.com)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 An independent, open-source software platform offering bioinformatics tools that run
 entirely in the browser, plus Arabic-first educational content in bioinformatics and
 computational biology.
 
-Live domain (not connected yet): `btc.org.ly`
+Live: **<https://btc.org.ly/ar>** (Arabic) · <https://btc.org.ly/en> (English)
+
+> **Keywords / topics:** bioinformatics, computational biology, DNA sequence analysis,
+> GC content, reverse complement, transcription, translation, primer design, primer Tm,
+> melting temperature, molecular weight, Arabic bioinformatics, Arabic science education,
+> RTL web app, Next.js, TypeScript, Cloudflare Workers, open source, browser-based tools,
+> privacy-first, no data upload.
 
 ## What this project is — and is not
 
@@ -151,6 +164,50 @@ Tool outputs are educational estimates.
   laboratory-grade design, use dedicated software such as Primer3 or OligoCalc.
 - **Translation** uses the standard genetic code and ignores mitochondrial or
   bacterial code variants. Ambiguous codons become `X`; stop codons become `*`.
+
+## Sitemap and SEO
+
+- `/<locale>/sitemap` — human-readable sitemap (every page, grouped by section).
+- `/sitemap.xml` — machine-readable sitemap with `hreflang` alternates.
+- `/robots.txt` — allows crawling, points at the sitemap.
+- Legacy URLs from the previous site (`/new-btc/...`, Arabic permalinks) return
+  **301** to `/ar`; `www.btc.org.ly` returns **308** to the apex domain.
+- Article pages emit `Article` JSON-LD; every page emits `WebSite` + `Organization`
+  JSON-LD and canonical + `hreflang` alternates.
+
+HTTPS is enforced at the Cloudflare edge: enable **SSL/TLS → Edge Certificates →
+Always Use HTTPS** in the dashboard (the Worker does not redirect http itself).
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md). In short: bilingual strings, documented
+formulas, no tracking, and `tsc --noEmit` + `npm run lint` before a pull request.
+
+Good first contributions:
+
+- a new browser tool (sequence formats, ORF finder, codon usage, restriction sites),
+- an Arabic explainer article for an existing tool,
+- a translation or RTL fix.
+
+## Discussions and support
+
+- **Questions / ideas / general discussion:**
+  [GitHub Discussions](https://github.com/Gamingmonster2/BTC/discussions)
+- **Bug or feature request:**
+  [Issues](https://github.com/Gamingmonster2/BTC/issues/new/choose)
+- **Quick contact:** WhatsApp from <https://btc.org.ly/ar/contact>
+
+### Supporting the project
+
+The platform is free, has no ads, and runs without tracking. If it saves you time,
+you can support its hosting and development:
+
+- GitHub Sponsors: [github.com/sponsors/Gamingmonster2](https://github.com/sponsors/Gamingmonster2)
+- Other ways (bank transfer, local payment apps): contact us via
+  <https://btc.org.ly/ar/contact>
+
+The Sponsor button is configured in [`.github/FUNDING.yml`](./.github/FUNDING.yml);
+add your Ko-fi / Patreon / Liberapay handle there to show it automatically.
 
 ## License
 

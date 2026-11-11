@@ -17,6 +17,25 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  async redirects() {
+    return [
+      // One canonical host: www → apex.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.btc.org.ly" }],
+        destination: "https://btc.org.ly/:path*",
+        permanent: true,
+      },
+      // Legacy WordPress URLs from the previous btc.org.ly site. Keep these
+      // permanent (301) so existing search results and inbound links transfer
+      // their ranking to the new pages instead of hitting a 404.
+      { source: "/new-btc", destination: "/ar", permanent: true },
+      { source: "/new-btc/:path*", destination: "/ar", permanent: true },
+      { source: "/index.php", destination: "/ar", permanent: true },
+      { source: "/index.php/:path*", destination: "/ar", permanent: true },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

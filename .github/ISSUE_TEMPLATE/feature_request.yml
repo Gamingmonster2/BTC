@@ -1,0 +1,49 @@
+name: اقتراح أداة أو ميزة / Feature request
+description: أداة جديدة، تحسين لأداة موجودة، أو موضوع مقال.
+title: "[idea]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: القسم
+      options:
+        - أداة جديدة (New tool)
+        - تحسين أداة موجودة (Improve a tool)
+        - مقال أو درس (Article / guide)
+        - واجهة الموقع (Site UI/UX)
+        - أخرى (Other)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: ما المشكلة التي يحلها هذا الاقتراح؟
+      description: صف الحاجة، لا الحل فقط. مثال: "أحتاج تحويل صيغ ملفات التسلسلات قبل التحليل".
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: الاقتراح
+      description: كيف تتخيل الأداة أو الميزة؟
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: مراجع أو أدوات مشابهة (اختياري)
+      description: روابط لأدوات أو أوراق علمية تساعد في التنفيذ.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: نطاق المشروع
+      options:
+        - label: أفهم أن المنصة منصة برمجية، وليست مختبراً أو جهة استشارات علمية.
+          required: true

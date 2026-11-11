@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: سؤال سريع أو ملاحظة على أداة — WhatsApp
+    url: https://btc.org.ly/ar/contact
+    about: أسرع طريقة للتواصل معنا. استخدم النماذج الجاهزة في صفحة التواصل.
+  - name: مناقشة عامة — GitHub Discussions
+    url: https://github.com/Gamingmonster2/BTC/discussions
+    about: أسئلة، أفكار، أو نقاش حول الأدوات والمقالات.
+  - name: اقتراح أداة أو موضوع مقال
+    url: https://github.com/Gamingmonster2/BTC/discussions/new?category=ideas
+    about: شارك فكرتك ليتم النظر فيها قبل فتح Issue.

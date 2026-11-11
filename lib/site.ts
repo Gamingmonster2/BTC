@@ -25,6 +25,7 @@ export const PUBLIC_ROUTES = [
   { path: "/about", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/learn", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.5, changeFrequency: "yearly" as const },
+  { path: "/sitemap", priority: 0.3, changeFrequency: "yearly" as const },
 ];
 
 /** Build an absolute URL for a locale + path pair. */

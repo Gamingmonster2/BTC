@@ -12,6 +12,7 @@ const FOOTER_NAV = [
   { key: "tools", href: "/tools" },
   { key: "learn", href: "/learn" },
   { key: "contact", href: "/contact" },
+  { key: "sitemap", href: "/sitemap" },
 ] as const;
 
 const FOOTER_TOOLS = [

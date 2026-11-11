@@ -73,7 +73,31 @@ export default async function LocaleLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const meta = await getTranslations("meta");
   const dir = locale === "ar" ? "rtl" : "ltr";
+
+  const siteJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: `${SITE_URL}/${locale}`,
+        name: SITE_NAME,
+        description: meta("description"),
+        inLanguage: locale,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+      },
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        description: meta("description"),
+        sameAs: [],
+      },
+    ],
+  };
 
   return (
     <html
@@ -83,6 +107,12 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
