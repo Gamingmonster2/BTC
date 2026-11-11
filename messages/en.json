@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "title": "BTC — Bioinformatics & AI Platform",
+    "description": "An independent software platform offering open bioinformatics tools that run in your browser, plus reliable Arabic educational content in bioinformatics and computational biology."
+  },
+  "brand": {
+    "short": "BTC",
+    "full": "BTC Bioinformatics Platform",
+    "tagline": "Bioinformatics & AI for the life sciences"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "tools": "Tools",
+    "learn": "Learn",
+    "contact": "Contact"
+  },
+  "common": {
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "loading": "Loading…",
+    "comingSoon": "Coming soon",
+    "tryTool": "Try the tool"
+  },
+  "home": {
+    "badge": "Open bioinformatics platform",
+    "title": "Bioinformatics tools in Arabic and English",
+    "subtitle": "We build open software tools for the life sciences that run directly in your browser, and publish reliable Arabic educational content in bioinformatics and AI applications in biology.",
+    "ctaTools": "Explore tools",
+    "ctaAbout": "Learn about the platform",
+    "featuresTitle": "What the platform offers",
+    "features": [
+      {
+        "title": "Interactive tools",
+        "description": "Sequence analyzers, primer calculators, and biological analysis tools that run in your browser with no installation."
+      },
+      {
+        "title": "Reliable Arabic content",
+        "description": "Bridging the Arabic-language gap in bioinformatics through verified tutorials and articles."
+      },
+      {
+        "title": "AI for the life sciences",
+        "description": "Practical applications of AI techniques to biological and sequence data analysis."
+      }
+    ],
+    "toolsTitle": "Featured tools",
+    "toolsSubtitle": "Try our first interactive tools",
+    "aboutTitle": "About this platform",
+    "aboutText": "BTC is an independent software initiative led by software engineers specializing in AI — not a traditional research lab. We focus on the computational side of the life sciences: building tools, sharing knowledge, and simplifying concepts."
+  },
+  "about": {
+    "title": "About",
+    "badge": "Who we are",
+    "intro": "The BTC Bioinformatics Platform is an independent software initiative working at the intersection of computational biology and artificial intelligence.",
+    "visionTitle": "Our vision",
+    "visionText": "To become a trusted Arabic-language digital reference for bioinformatics tools and knowledge, and to make biological analysis tools freely and easily available to everyone.",
+    "missionTitle": "Our mission",
+    "missionText": "To build high-quality open tools, publish verified Arabic educational content, and apply AI to simplify biological data analysis for researchers, students, and enthusiasts.",
+    "transparencyTitle": "Full transparency",
+    "transparencyText": "We are not a wet lab and we do not claim to run laboratory experiments. We are a software team focused on the computational side: software, algorithms, and digital education. This transparency is the foundation of our credibility.",
+    "valuesTitle": "Our values",
+    "values": [
+      { "title": "Open source", "description": "We share the code of our tools and methodologies with the community." },
+      { "title": "Scientific accuracy", "description": "We rely on trusted scientific sources and methodologies." },
+      { "title": "Arabic localization", "description": "We are committed to making scientific knowledge available in Arabic." }
+    ]
+  },
+  "tools": {
+    "title": "Tools",
+    "subtitle": "Bioinformatics tools that run directly in your browser — free and open source.",
+    "list": [
+      {
+        "name": "DNA sequence analyzer",
+        "description": "Compute GC content, reverse complement, transcription to RNA, and translation to protein.",
+        "href": "/tools/dna-analyzer"
+      },
+      {
+        "name": "Primer melting temperature (Tm) calculator",
+        "description": "Compute primer length, GC content, melting temperature (Tm), and reverse complement.",
+        "href": "/tools/primer-tm"
+      }
+    ]
+  },
+  "dna": {
+    "title": "DNA sequence analyzer",
+    "description": "Enter a DNA sequence to get base counts, GC content, reverse complement, transcription to mRNA, and translation to a protein sequence.",
+    "inputLabel": "DNA sequence",
+    "inputPlaceholder": "Example: ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG",
+    "analyze": "Analyze",
+    "clear": "Clear",
+    "errors": {
+      "title": "Error",
+      "empty": "Please enter a DNA sequence.",
+      "invalid": "The sequence contains invalid characters. Accepted: A, C, G, T (plus IUPAC ambiguity codes such as R, Y, S, N).",
+      "tooShort": "The sequence is too short — enter at least 3 bases."
+    },
+    "results": {
+      "title": "Results",
+      "length": "Length",
+      "bases": "Base counts",
+      "gcContent": "GC content",
+      "atGc": "AT / GC ratio",
+      "molecularWeight": "Approximate molecular weight",
+      "reverseComplement": "Reverse complement",
+      "transcription": "Transcription to RNA (mRNA)",
+      "translation": "Translation to protein",
+      "basesUnit": "bp",
+      "readingFrame": "Reading frame (5' to 3')"
+    }
+  },
+  "primer": {
+    "title": "Primer melting temperature (Tm) calculator",
+    "description": "Enter a primer sequence to get its length, GC content, melting temperature (Tm) using two formulas, and reverse complement.",
+    "inputLabel": "Primer sequence",
+    "inputPlaceholder": "Example: CAGTGATGGATCTGGGCATT",
+    "analyze": "Calculate",
+    "clear": "Clear",
+    "errors": {
+      "title": "Error",
+      "empty": "Please enter a primer sequence.",
+      "invalid": "The sequence contains invalid DNA characters.",
+      "tooShort": "The primer is too short — enter at least 8 bases."
+    },
+    "results": {
+      "title": "Results",
+      "length": "Length",
+      "bases": "Base counts",
+      "gcContent": "GC content",
+      "tmBasic": "Tm (2+4 rule)",
+      "tmSalt": "Tm (salt-adjusted, 50mM)",
+      "reverseComplement": "Reverse complement",
+      "gcClamp": "3' end (GC clamp)",
+      "gcClampYes": "Ends with G or C",
+      "gcClampNo": "Does not end with G or C",
+      "note": "Note: these values are estimates for educational purposes. For laboratory-grade accuracy, use specialized software such as Primer3 or OligoCalc."
+    }
+  },
+  "learn": {
+    "title": "Learn",
+    "subtitle": "Arabic educational content in bioinformatics and AI applications.",
+    "badge": "In preparation",
+    "intro": "We are currently preparing a series of Arabic lessons and articles covering: bioinformatics fundamentals, sequence analysis, biological databases, and AI applications in biology.",
+    "topicsTitle": "Upcoming topics",
+    "topics": [
+      "Introduction to bioinformatics",
+      "DNA and RNA sequence analysis",
+      "Biological databases (NCBI, UniProt)",
+      "Introduction to machine learning for biological data",
+      "Command-line tools for bioinformatics"
+    ]
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "We welcome your questions, suggestions, and contributions.",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here…",
+    "submit": "Send via email",
+    "note": "When you click send, your email app will open with a pre-filled message.",
+    "success": "Thank you for reaching out!"
+  },
+  "footer": {
+    "description": "An open platform for bioinformatics tools and content in Arabic and English.",
+    "navigation": "Links",
+    "tools": "Tools",
+    "rights": "All rights reserved.",
+    "builtWith": "Built with open-source technologies."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The link you requested is unavailable or has moved. You can return to the home page or explore the tools.",
+    "backHome": "Back to home"
+  }
+}
