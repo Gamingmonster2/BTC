@@ -34,6 +34,22 @@ const nextConfig: NextConfig = {
       { source: "/new-btc/:path*", destination: "/ar", permanent: true },
       { source: "/index.php", destination: "/ar", permanent: true },
       { source: "/index.php/:path*", destination: "/ar", permanent: true },
+
+      // Legacy media and feeds. The old WordPress install stored uploads and
+      // PDFs at these paths; the files no longer exist, but inbound links to
+      // them (CVs, forms, news items) are still live on university sites.
+      // Redirecting instead of returning 404 keeps that link equity.
+      { source: "/wp-content/:path*", destination: "/ar/about", permanent: true },
+      { source: "/wp-includes/:path*", destination: "/ar", permanent: true },
+      { source: "/wp-json/:path*", destination: "/ar", permanent: true },
+      { source: "/files/:path*", destination: "/ar/about", permanent: true },
+      { source: "/ar/files/:path*", destination: "/ar/about", permanent: true },
+      { source: "/feed", destination: "/ar/learn", permanent: true },
+      { source: "/comments/feed", destination: "/ar/learn", permanent: true },
+
+      // Old XML sitemaps → the new canonical one.
+      { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/wp-sitemap.xml", destination: "/sitemap.xml", permanent: true },
     ];
   },
 };

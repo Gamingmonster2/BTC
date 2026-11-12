@@ -32,6 +32,15 @@ export async function pageMetadata({
 
   const url = `/${locale}${path}`;
 
+  const images = [
+    {
+      url: "/og.png",
+      width: 1200,
+      height: 630,
+      alt: "BTC — Bioinformatics & AI for the Life Sciences",
+    },
+  ];
+
   const openGraph: Metadata["openGraph"] =
     type === "article"
       ? {
@@ -39,6 +48,7 @@ export async function pageMetadata({
           title,
           description,
           url,
+          images,
           publishedTime,
           modifiedTime: modifiedTime ?? publishedTime,
         }
@@ -47,6 +57,7 @@ export async function pageMetadata({
           title,
           description,
           url,
+          images,
         };
 
   return {
@@ -64,6 +75,7 @@ export async function pageMetadata({
       card: "summary_large_image",
       title,
       description,
+      images,
     },
   };
 }
