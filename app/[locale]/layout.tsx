@@ -51,6 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: `/${locale}`,
       languages: { ...languages, "x-default": `/${routing.defaultLocale}` },
+      types: {
+        "application/rss+xml": `${SITE_URL}/rss.xml`,
+      },
     },
     openGraph: {
       type: "website",

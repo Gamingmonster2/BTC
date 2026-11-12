@@ -94,6 +94,11 @@
         "name": "Primer melting temperature (Tm) calculator",
         "description": "Compute primer length, GC content, melting temperature (Tm), and reverse complement.",
         "href": "/tools/primer-tm"
+      },
+      {
+        "name": "ORF Finder",
+        "description": "Find open reading frames on both strands, from ATG to the first stop codon.",
+        "href": "/tools/orf-finder"
       }
     ]
   },
@@ -220,5 +225,35 @@
     "xml": "Search-engine sitemap (XML)",
     "robots": "robots.txt file",
     "note": "The XML sitemap is the machine-readable version. Search engines read sitemap.xml; this page is for people."
+  },
+  "orf": {
+    "title": "ORF Finder",
+    "description": "Find open reading frames on both strands of a DNA sequence, from ATG to the first stop codon.",
+    "inputLabel": "DNA sequence",
+    "inputPlaceholder": "Paste the sequence here — A, C, G, T only",
+    "minLengthLabel": "Minimum protein length (aa)",
+    "minLengthHint": "Defaults to 30 amino acids. Lower the threshold to see more hits.",
+    "find": "Find ORFs",
+    "clear": "Clear",
+    "errors": {
+      "title": "Could not analyse the sequence",
+      "empty": "Enter a sequence first.",
+      "invalid": "The sequence contains invalid characters. Use A, C, G, T (or IUPAC codes).",
+      "tooShort": "The sequence is too short — at least 6 bases are required.",
+      "tooLong": "The sequence is longer than 50,000 bases. Extract the region you need first."
+    },
+    "results": {
+      "title": "Open reading frames",
+      "count": "Results: {count}",
+      "scanned": "Bases scanned: {bases}",
+      "none": "No ORF matched this minimum length. Try lowering the threshold.",
+      "strand": "Strand",
+      "frame": "Frame",
+      "position": "Position (1-based)",
+      "lengthAa": "Length (aa)",
+      "protein": "Protein",
+      "noStop": "(no stop)"
+    },
+    "note": "The tool assumes the standard genetic code: ATG start, TAA/TAG/TGA stop. It does not handle splicing, mitochondrial or bacterial code variants, and shows at most 200 hits sorted by length."
   }
 }

@@ -47,12 +47,15 @@ This distinction is intentional and is stated on the public About page.
   single-stranded molecular weight.
 - **Primer Tm calculator** — length, GC content, Wallace (2+4) Tm with a validity
   warning, salt-adjusted Tm, reverse complement, and GC clamp strength.
+- **ORF Finder** — six-frame scan on both strands, ATG start to the first in-frame
+  stop codon, coordinates, nested hits, and copyable protein sequences.
 - **Learn articles** — bilingual articles stored as structured TypeScript blocks,
   each internally linked to the tool it explains.
 - **WhatsApp contact** — the number plus ready-made message templates (no server-side
   form, no stored messages).
 - Honest About page, SEO metadata, canonical URLs, `hreflang`, `sitemap.xml`,
-  `robots.txt`, and localized 404 pages.
+  `robots.txt`, an RSS feed, structured data (`WebSite`, `Organization`,
+  `SoftwareApplication`, `BreadcrumbList`), and localized 404 pages.
 
 All sequence analysis runs client-side; no sequence data leaves the browser.
 
@@ -164,16 +167,25 @@ Tool outputs are educational estimates.
   laboratory-grade design, use dedicated software such as Primer3 or OligoCalc.
 - **Translation** uses the standard genetic code and ignores mitochondrial or
   bacterial code variants. Ambiguous codons become `X`; stop codons become `*`.
+- **ORF detection** scans all six frames (three per strand), starts at `ATG` and
+  ends at the first in-frame `TAA`/`TAG`/`TGA`, or at the sequence end when no
+  stop codon exists (flagged “no stop”). Up to 10 nested ATGs per stop-delimited
+  region and at most 200 hits are returned, sorted by length. Splicing,
+  alternative start codons (e.g. bacterial `GTG`/`TTG`), and non-standard genetic
+  codes are not modelled. Input is capped at 50,000 bases.
 
 ## Sitemap and SEO
 
 - `/<locale>/sitemap` — human-readable sitemap (every page, grouped by section).
 - `/sitemap.xml` — machine-readable sitemap with `hreflang` alternates.
+- `/rss.xml` — bilingual RSS feed for the Learn articles, linked from every page.
 - `/robots.txt` — allows crawling, points at the sitemap.
-- Legacy URLs from the previous site (`/new-btc/...`, Arabic permalinks) return
-  **301** to `/ar`; `www.btc.org.ly` returns **308** to the apex domain.
-- Article pages emit `Article` JSON-LD; every page emits `WebSite` + `Organization`
-  JSON-LD and canonical + `hreflang` alternates.
+- Legacy URLs from the previous site (`/new-btc/...`, `/wp-content/...`,
+  `/ar/files/...`, Arabic permalinks) return **301** to a relevant page instead of
+  404; `www.btc.org.ly` returns **308** to the apex domain.
+- Article pages emit `Article` JSON-LD; tool pages emit `SoftwareApplication` +
+  `BreadcrumbList`; the tools index emits `ItemList`; every page emits
+  `WebSite` + `Organization` JSON-LD and canonical + `hreflang` alternates.
 
 HTTPS is enforced at the Cloudflare edge: enable **SSL/TLS → Edge Certificates →
 Always Use HTTPS** in the dashboard (the Worker does not redirect http itself).
@@ -185,7 +197,7 @@ formulas, no tracking, and `tsc --noEmit` + `npm run lint` before a pull request
 
 Good first contributions:
 
-- a new browser tool (sequence formats, ORF finder, codon usage, restriction sites),
+- a new browser tool (sequence formats, codon usage, restriction sites),
 - an Arabic explainer article for an existing tool,
 - a translation or RTL fix.
 

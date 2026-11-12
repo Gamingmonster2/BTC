@@ -2,12 +2,20 @@ import type { Article } from "./types";
 import { whatIsBtc } from "./what-is-btc";
 import { dnaAnalyzerGuide } from "./dna-analyzer-guide";
 import { primerTmGuide } from "./primer-tm-guide";
+import { orfFinderGuide } from "./orf-finder-guide";
+import { arabicBioinformaticsTools } from "./arabic-bioinformatics-tools";
 
 /**
  * All published articles, newest first.
  * Add a new article by creating a file next to this one and appending it here.
  */
-export const ARTICLES: Article[] = [whatIsBtc, dnaAnalyzerGuide, primerTmGuide];
+export const ARTICLES: Article[] = [
+  arabicBioinformaticsTools,
+  orfFinderGuide,
+  whatIsBtc,
+  dnaAnalyzerGuide,
+  primerTmGuide,
+];
 
 /** Slugs of all published articles, used for static params and the sitemap. */
 export const ARTICLE_SLUGS = ARTICLES.map((article) => article.slug);

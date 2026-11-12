@@ -116,6 +116,15 @@ export default async function SitemapPage() {
           </li>
           <li>
             <a
+              href={`${SITE_URL}/rss.xml`}
+              className="inline-flex items-center gap-1.5 text-primary underline-offset-4 hover:underline"
+            >
+              {t("rss")}
+              <ExternalLinkIcon className="size-3.5" />
+            </a>
+          </li>
+          <li>
+            <a
               href={`${SITE_URL}/robots.txt`}
               className="inline-flex items-center gap-1.5 text-primary underline-offset-4 hover:underline"
             >

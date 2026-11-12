@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowRightIcon, DnaIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
@@ -8,7 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { JsonLd } from "@/components/site/json-ld";
 import { pageMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site";
+
+type ToolEntry = { name: string; description: string; href: string };
 
 export async function generateMetadata() {
   const t = await getTranslations("tools");
@@ -22,9 +26,25 @@ export async function generateMetadata() {
 export default async function ToolsPage() {
   const t = await getTranslations("tools");
   const common = await getTranslations("common");
+  const locale = await getLocale();
+
+  const list = t.raw("list") as ToolEntry[];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: t("title"),
+    itemListElement: list.map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.name,
+      url: `${SITE_URL}/${locale}${tool.href}`,
+    })),
+  };
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6">
+      <JsonLd data={jsonLd} />
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           {t("title")}
@@ -35,11 +55,14 @@ export default async function ToolsPage() {
       </div>
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2">
-        {[0, 1].map((i) => (
+        {list.map((tool) => (
           <Link
-            key={i}
+            key={tool.href}
             href={
-              t(`list.${i}.href`) as "/tools/dna-analyzer" | "/tools/primer-tm"
+              tool.href as
+                | "/tools/dna-analyzer"
+                | "/tools/primer-tm"
+                | "/tools/orf-finder"
             }
           >
             <Card className="h-full transition-colors hover:bg-muted/50">
@@ -47,8 +70,8 @@ export default async function ToolsPage() {
                 <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <DnaIcon className="size-5" />
                 </span>
-                <CardTitle>{t(`list.${i}.name`)}</CardTitle>
-                <CardDescription>{t(`list.${i}.description`)}</CardDescription>
+                <CardTitle>{tool.name}</CardTitle>
+                <CardDescription>{tool.description}</CardDescription>
               </CardHeader>
               <CardContent className="flex items-center gap-1 text-sm font-medium text-primary">
                 {common("tryTool")}

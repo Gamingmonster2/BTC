@@ -22,6 +22,11 @@ export const PUBLIC_ROUTES = [
     priority: 0.9,
     changeFrequency: "monthly" as const,
   },
+  {
+    path: "/tools/orf-finder",
+    priority: 0.9,
+    changeFrequency: "monthly" as const,
+  },
   { path: "/about", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/learn", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.5, changeFrequency: "yearly" as const },

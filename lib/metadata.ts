@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/site";
 
 /**
  * Build page metadata (title, description, canonical and hreflang alternates)
@@ -68,6 +69,9 @@ export async function pageMetadata({
       languages: {
         ...languages,
         "x-default": `/${routing.defaultLocale}${path}`,
+      },
+      types: {
+        "application/rss+xml": `${SITE_URL}/rss.xml`,
       },
     },
     openGraph,
