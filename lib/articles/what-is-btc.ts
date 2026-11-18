@@ -4,6 +4,13 @@ export const whatIsBtc: Article = {
   slug: "what-is-btc",
   date: "2026-11-11",
   readingMinutes: 6,
+  cover: {
+    src: "/art/hero.svg",
+    alt: {
+      ar: "لولب DNA يتحول إلى شبكة عصبية",
+      en: "A DNA helix dissolving into a neural network",
+    },
+  },
   content: {
     ar: {
       title: "ما هي منصة BTC؟ ولماذا وُجدت؟",

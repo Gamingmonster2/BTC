@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ArtImage } from "@/components/site/art-image";
 import { ARTICLES } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
@@ -56,27 +57,39 @@ export default async function LearnPage() {
                 href={`/${locale}/learn/${article.slug}`}
                 className="group block"
               >
-                <Card className="transition-colors group-hover:bg-muted/50">
-                  <CardHeader>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {article.tool && (
-                        <Badge variant="outline">{t("toolArticle")}</Badge>
-                      )}
-                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                        <ClockIcon className="size-3.5" />
-                        {t("readingTime", {
-                          minutes: article.readingMinutes,
-                        })}
-                      </span>
-                    </div>
-                    <CardTitle className="flex items-start justify-between gap-3 text-lg">
-                      <span>{content.title}</span>
-                      <ArrowRightIcon className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
-                    </CardTitle>
-                    <CardDescription className="leading-6">
-                      {content.summary}
-                    </CardDescription>
-                  </CardHeader>
+                <Card className="gap-0 overflow-hidden p-0 transition-colors group-hover:bg-muted/50">
+                  <div className="flex flex-col sm:flex-row">
+                    {article.cover && (
+                      <div className="aspect-[3/2] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-52">
+                        <ArtImage
+                          src={article.cover.src}
+                          alt={article.cover.alt[locale]}
+                          sizes="(max-width: 640px) 100vw, 208px"
+                          className="transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <CardHeader className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {article.tool && (
+                          <Badge variant="outline">{t("toolArticle")}</Badge>
+                        )}
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                          <ClockIcon className="size-3.5" />
+                          {t("readingTime", {
+                            minutes: article.readingMinutes,
+                          })}
+                        </span>
+                      </div>
+                      <CardTitle className="flex items-start justify-between gap-3 text-lg">
+                        <span>{content.title}</span>
+                        <ArrowRightIcon className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                      </CardTitle>
+                      <CardDescription className="leading-6">
+                        {content.summary}
+                      </CardDescription>
+                    </CardHeader>
+                  </div>
                 </Card>
               </Link>
             );

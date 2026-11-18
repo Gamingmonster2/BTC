@@ -53,7 +53,62 @@
     "toolsTitle": "Featured tools",
     "toolsSubtitle": "Try our first interactive tools",
     "aboutTitle": "About this platform",
-    "aboutText": "BTC is an independent software initiative led by software engineers specializing in AI — not a traditional research lab. We focus on the computational side of the life sciences: building tools, sharing knowledge, and simplifying concepts."
+    "aboutText": "BTC is an independent software initiative led by software engineers specializing in AI — not a traditional research lab. We focus on the computational side of the life sciences: building tools, sharing knowledge, and simplifying concepts.",
+    "howTitle": "How the platform works",
+    "howSubtitle": "Three steps from a raw sequence to a result you can explain — and all of the computation happens in your browser, no sequence is uploaded.",
+    "howSteps": [
+      {
+        "title": "Paste the sequence",
+        "description": "Drop in DNA, a protein, or a primer. Whitespace and digits are cleaned up before analysis."
+      },
+      {
+        "title": "Pick a tool",
+        "description": "DNA analyzer, Tm calculator, ORF finder, or the protein feature extractor — each one names the formula it uses."
+      },
+      {
+        "title": "Read the result",
+        "description": "Verifiable numbers, an explicit list of what the tool does not compute, and links to articles that explain each value."
+      }
+    ],
+    "latestTitle": "Latest articles",
+    "latestSubtitle": "Arabic and English explainers written so you understand the number before you copy it.",
+    "marquee": [
+      "DNA",
+      "Open reading frames",
+      "Melting temperature",
+      "Proteins",
+      "Artificial intelligence",
+      "Bioinformatics",
+      "Sequence analysis",
+      "Scientific glossary",
+      "RTL",
+      "Open source"
+    ],
+    "stats": [
+      {
+        "value": 4,
+        "suffix": "",
+        "label": "Free tools"
+      },
+      {
+        "value": 100,
+        "suffix": "%",
+        "label": "Computed in your browser"
+      },
+      {
+        "value": 2,
+        "suffix": "",
+        "label": "Languages: Arabic and English"
+      },
+      {
+        "value": 6,
+        "suffix": "",
+        "label": "Bilingual articles"
+      }
+    ],
+    "heroImageAlt": "Abstract artwork: a DNA helix dissolving into a neural network, symbolising the intersection of biochemistry and artificial intelligence",
+    "chipBrowser": "Runs in your browser",
+    "ctaLearn": "All articles"
   },
   "about": {
     "title": "About",
@@ -99,6 +154,11 @@
         "name": "ORF Finder",
         "description": "Find open reading frames on both strands, from ATG to the first stop codon.",
         "href": "/tools/orf-finder"
+      },
+      {
+        "name": "Protein Feature Extractor",
+        "description": "Biochemical descriptors and an AI-ready numeric feature vector from a protein sequence.",
+        "href": "/tools/protein-features"
       }
     ]
   },
@@ -255,5 +315,45 @@
       "noStop": "(no stop)"
     },
     "note": "The tool assumes the standard genetic code: ATG start, TAA/TAG/TGA stop. It does not handle splicing, mitochondrial or bacterial code variants, and shows at most 200 hits sorted by length."
+  },
+  "protein": {
+    "title": "Protein Feature Extractor for Machine Learning",
+    "description": "Turn a protein sequence into AI-ready biochemical features: molecular weight, isoelectric point, hydropathy, and the frequencies of all twenty amino acids.",
+    "imageAlt": "Abstract illustration of a folded protein surrounded by neural-network nodes",
+    "inputLabel": "Protein sequence",
+    "inputPlaceholder": "Paste the sequence here — one-letter amino acid codes",
+    "analyze": "Analyse sequence",
+    "example": "Example: insulin A chain",
+    "clear": "Clear",
+    "errors": {
+      "title": "Could not analyse the sequence",
+      "empty": "Enter a protein sequence first.",
+      "invalid": "Non-standard characters: {chars}. Use only the twenty standard amino acids.",
+      "tooLong": "The sequence is longer than 100,000 residues."
+    },
+    "stats": {
+      "length": "Length (aa)",
+      "mw": "Molecular weight",
+      "pi": "Isoelectric point (pI)",
+      "charge": "Net charge at pH 7",
+      "gravy": "GRAVY (hydropathy)",
+      "aromaticity": "Aromaticity",
+      "aliphatic": "Aliphatic index",
+      "extinction": "Extinction at 280 nm"
+    },
+    "units": {
+      "da": "daltons",
+      "molar": "M⁻¹·cm⁻¹"
+    },
+    "composition": {
+      "title": "Amino acid composition",
+      "hint": "{count} residues across 20 residue types"
+    },
+    "vector": {
+      "title": "Feature vector",
+      "hint": "{count} numeric values ready for a model — copy the JSON or download CSV",
+      "downloadCsv": "Download CSV"
+    },
+    "note": "Values are computed from the primary sequence only: mass from average residue masses, GRAVY from Kyte-Doolittle, pI from an iterative charge model, and the extinction coefficient from Pace 1995. The tool does not predict secondary structure, does not compute an instability index (it needs the 400-entry dipeptide table), and does not model post-translational modifications."
   }
 }

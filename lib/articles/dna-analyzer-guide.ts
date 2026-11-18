@@ -5,6 +5,13 @@ export const dnaAnalyzerGuide: Article = {
   date: "2026-11-11",
   readingMinutes: 8,
   tool: "dna-analyzer",
+  cover: {
+    src: "/art/article-dna.svg",
+    alt: {
+      ar: "لولب DNA مضيء على خلفية داكنة",
+      en: "A glowing DNA double helix on a dark background",
+    },
+  },
   content: {
     ar: {
       title: "دليل محلّل تسلسل DNA: ماذا يحسب ولماذا",

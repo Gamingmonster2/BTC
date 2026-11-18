@@ -28,6 +28,12 @@ export interface ArticleContent {
 
 export type ArticleLocale = "ar" | "en";
 
+/** Cover artwork for an article (original SVG in /public/art). */
+export interface ArticleCover {
+  src: string;
+  alt: Record<ArticleLocale, string>;
+}
+
 export interface Article {
   slug: string;
   /** ISO publication date. */
@@ -35,5 +41,7 @@ export interface Article {
   readingMinutes: number;
   /** Slug of the tool this article explains, if any. */
   tool?: string;
+  /** Optional cover image shown on the article and in listings. */
+  cover?: ArticleCover;
   content: Record<ArticleLocale, ArticleContent>;
 }

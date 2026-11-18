@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeftIcon, CalendarIcon, ClockIcon } from "lucide-react";
 import { ArticleBody } from "@/components/articles/article-body";
+import { ArtImage } from "@/components/site/art-image";
+import { BorderBeam } from "@/components/magicui/border-beam";
 import { Comments } from "@/components/site/comments";
 import { Badge } from "@/components/ui/badge";
 import { ARTICLE_SLUGS, getArticle } from "@/lib/articles";
@@ -65,6 +67,7 @@ export default async function ArticlePage({ params }: PageProps) {
     author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
     mainEntityOfPage: `${SITE_URL}/${locale}/learn/${article.slug}`,
+    ...(article.cover ? { image: `${SITE_URL}${article.cover.src}` } : {}),
   };
 
   return (
@@ -107,6 +110,20 @@ export default async function ArticlePage({ params }: PageProps) {
           </span>
         </div>
       </header>
+
+      {article.cover && (
+        <div className="relative mt-8 overflow-hidden rounded-2xl border">
+          <BorderBeam duration={11} />
+          <div className="aspect-[3/2] w-full sm:aspect-[2/1]">
+            <ArtImage
+              src={article.cover.src}
+              alt={article.cover.alt[locale]}
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+            />
+          </div>
+        </div>
+      )}
 
       <div className="mt-8">
         <ArticleBody article={article} locale={locale} />

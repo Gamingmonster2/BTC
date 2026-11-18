@@ -1,5 +1,11 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { ArrowRightIcon, DnaIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  BrainCircuitIcon,
+  DnaIcon,
+  ScanLineIcon,
+  ThermometerIcon,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   Card,
@@ -13,6 +19,8 @@ import { pageMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site";
 
 type ToolEntry = { name: string; description: string; href: string };
+
+const TOOL_ICONS = [DnaIcon, ThermometerIcon, ScanLineIcon, BrainCircuitIcon];
 
 export async function generateMetadata() {
   const t = await getTranslations("tools");
@@ -55,31 +63,35 @@ export default async function ToolsPage() {
       </div>
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2">
-        {list.map((tool) => (
-          <Link
-            key={tool.href}
-            href={
-              tool.href as
-                | "/tools/dna-analyzer"
-                | "/tools/primer-tm"
-                | "/tools/orf-finder"
-            }
-          >
-            <Card className="h-full transition-colors hover:bg-muted/50">
-              <CardHeader>
-                <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <DnaIcon className="size-5" />
-                </span>
-                <CardTitle>{tool.name}</CardTitle>
-                <CardDescription>{tool.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex items-center gap-1 text-sm font-medium text-primary">
-                {common("tryTool")}
-                <ArrowRightIcon className="size-4 rtl:rotate-180" />
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+        {list.map((tool, index) => {
+          const Icon = TOOL_ICONS[index] ?? DnaIcon;
+          return (
+            <Link
+              key={tool.href}
+              href={
+                tool.href as
+                  | "/tools/dna-analyzer"
+                  | "/tools/primer-tm"
+                  | "/tools/orf-finder"
+                  | "/tools/protein-features"
+              }
+            >
+              <Card className="card-lift h-full hover:border-brand/40">
+                <CardHeader>
+                  <span className="flex size-10 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                    <Icon className="size-5" />
+                  </span>
+                  <CardTitle>{tool.name}</CardTitle>
+                  <CardDescription>{tool.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex items-center gap-1 text-sm font-medium text-brand">
+                  {common("tryTool")}
+                  <ArrowRightIcon className="size-4 rtl:rotate-180" />
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

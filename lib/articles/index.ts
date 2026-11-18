@@ -4,12 +4,14 @@ import { dnaAnalyzerGuide } from "./dna-analyzer-guide";
 import { primerTmGuide } from "./primer-tm-guide";
 import { orfFinderGuide } from "./orf-finder-guide";
 import { arabicBioinformaticsTools } from "./arabic-bioinformatics-tools";
+import { proteinFeaturesAi } from "./protein-features-ai";
 
 /**
  * All published articles, newest first.
  * Add a new article by creating a file next to this one and appending it here.
  */
 export const ARTICLES: Article[] = [
+  proteinFeaturesAi,
   arabicBioinformaticsTools,
   orfFinderGuide,
   whatIsBtc,

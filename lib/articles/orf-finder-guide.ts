@@ -5,6 +5,13 @@ export const orfFinderGuide: Article = {
   date: "2026-11-12",
   readingMinutes: 6,
   tool: "orf-finder",
+  cover: {
+    src: "/art/article-orf.svg",
+    alt: {
+      ar: "شريط من الكودونات يمر عبر آلة جزيئية تقرأه",
+      en: "A tape of codons passing through a molecular reading machine",
+    },
+  },
   content: {
     ar: {
       title: "دليل إطارات القراءة المفتوحة (ORF): من ATG إلى codon التوقف",

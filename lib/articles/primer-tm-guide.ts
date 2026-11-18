@@ -5,6 +5,13 @@ export const primerTmGuide: Article = {
   date: "2026-11-11",
   readingMinutes: 7,
   tool: "primer-tm",
+  cover: {
+    src: "/art/article-tm.svg",
+    alt: {
+      ar: "شريطان من DNA ينفصلان عند ارتفاع الحرارة",
+      en: "Two DNA strands separating as temperature rises",
+    },
+  },
   content: {
     ar: {
       title: "دليل حاسبة درجة انصهار البادئات (Tm)",

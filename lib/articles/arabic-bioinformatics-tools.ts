@@ -4,6 +4,13 @@ export const arabicBioinformaticsTools: Article = {
   slug: "arabic-bioinformatics-tools",
   date: "2026-11-12",
   readingMinutes: 5,
+  cover: {
+    src: "/art/article-arabic.svg",
+    alt: {
+      ar: "نجمة هندسية إسلامية تتشابك مع شبكة جزيئية",
+      en: "An Islamic geometric star interlocking with a molecular lattice",
+    },
+  },
   content: {
     ar: {
       title: "أدوات المعلوماتية الحيوية بالعربية: دليل البداية",
