@@ -6,7 +6,7 @@ export const dnaAnalyzerGuide: Article = {
   readingMinutes: 8,
   tool: "dna-analyzer",
   cover: {
-    src: "/art/article-dna.svg",
+    src: "/images/articles/dna-analyzer-guide.webp",
     alt: {
       ar: "لولب DNA مضيء على خلفية داكنة",
       en: "A glowing DNA double helix on a dark background",

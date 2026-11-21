@@ -6,7 +6,7 @@ export const primerTmGuide: Article = {
   readingMinutes: 7,
   tool: "primer-tm",
   cover: {
-    src: "/art/article-tm.svg",
+    src: "/images/articles/primer-tm-guide.webp",
     alt: {
       ar: "شريطان من DNA ينفصلان عند ارتفاع الحرارة",
       en: "Two DNA strands separating as temperature rises",

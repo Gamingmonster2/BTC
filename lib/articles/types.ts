@@ -28,7 +28,7 @@ export interface ArticleContent {
 
 export type ArticleLocale = "ar" | "en";
 
-/** Cover artwork for an article (original SVG in /public/art). */
+/** Cover photo for an article (free Pexels image in /public/images/articles). */
 export interface ArticleCover {
   src: string;
   alt: Record<ArticleLocale, string>;

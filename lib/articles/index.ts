@@ -5,12 +5,22 @@ import { primerTmGuide } from "./primer-tm-guide";
 import { orfFinderGuide } from "./orf-finder-guide";
 import { arabicBioinformaticsTools } from "./arabic-bioinformatics-tools";
 import { proteinFeaturesAi } from "./protein-features-ai";
+import { geneticCodeBasics } from "./genetic-code-basics";
+import { dnaVsRna } from "./dna-vs-rna";
+import { kmersAndMotifs } from "./kmers-and-motifs";
+import { aiInBioinformatics } from "./ai-in-bioinformatics";
+import { bioinformaticsGlossary } from "./bioinformatics-glossary";
 
 /**
  * All published articles, newest first.
  * Add a new article by creating a file next to this one and appending it here.
  */
 export const ARTICLES: Article[] = [
+  geneticCodeBasics,
+  dnaVsRna,
+  kmersAndMotifs,
+  aiInBioinformatics,
+  bioinformaticsGlossary,
   proteinFeaturesAi,
   arabicBioinformaticsTools,
   orfFinderGuide,

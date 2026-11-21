@@ -221,20 +221,20 @@
   },
   "learn": {
     "title": "Learn",
-    "subtitle": "Arabic educational content in bioinformatics and AI applications.",
+    "subtitle": "Arabic and English articles on bioinformatics and AI applications.",
     "badge": "Articles & guides",
-    "intro": "We publish articles that explain the tools we build: where every number comes from, and when it should not be trusted. Every article links internally to the tool it explains.",
+    "intro": "We publish articles in Arabic and English that explain the tools we build: where every number comes from, and when it should not be trusted. Each article links to a relevant tool where one applies.",
     "articlesTitle": "Articles",
     "readingTime": "{minutes} min read",
     "backToLearn": "Back to Learn",
     "toolArticle": "Tool article",
     "topicsTitle": "Upcoming topics",
     "topics": [
-      "Introduction to bioinformatics",
-      "DNA and RNA sequence analysis",
       "Biological databases (NCBI, UniProt)",
-      "Introduction to machine learning for biological data",
-      "Command-line tools for bioinformatics"
+      "Command-line tools for bioinformatics",
+      "Sequence alignment algorithms",
+      "Protein structure prediction basics",
+      "Variant calling and interpretation"
     ]
   },
   "contact": {
@@ -283,6 +283,7 @@
       "technical": "Technical files"
     },
     "xml": "Search-engine sitemap (XML)",
+    "rss": "Articles feed (RSS)",
     "robots": "robots.txt file",
     "note": "The XML sitemap is the machine-readable version. Search engines read sitemap.xml; this page is for people."
   },

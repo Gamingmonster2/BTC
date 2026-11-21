@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArtImage } from "@/components/site/art-image";
+import { PhotoCover } from "@/components/site/photo-cover";
 import { ARTICLES } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
@@ -60,14 +60,14 @@ export default async function LearnPage() {
                 <Card className="gap-0 overflow-hidden p-0 transition-colors group-hover:bg-muted/50">
                   <div className="flex flex-col sm:flex-row">
                     {article.cover && (
-                      <div className="aspect-[3/2] w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-52">
-                        <ArtImage
-                          src={article.cover.src}
-                          alt={article.cover.alt[locale]}
-                          sizes="(max-width: 640px) 100vw, 208px"
-                          className="transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
+                      <PhotoCover
+                        compact
+                        className="w-full shrink-0 sm:w-52"
+                        src={article.cover.src}
+                        alt={article.cover.alt[locale]}
+                        eyebrow={t("articlesTitle")}
+                        sizes="(max-width: 640px) 100vw, 208px"
+                      />
                     )}
                     <CardHeader className="flex-1">
                       <div className="flex flex-wrap items-center gap-2">

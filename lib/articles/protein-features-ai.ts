@@ -6,7 +6,7 @@ export const proteinFeaturesAi: Article = {
   readingMinutes: 7,
   tool: "protein-features",
   cover: {
-    src: "/art/tool-protein.svg",
+    src: "/images/articles/protein-features-ai.webp",
     alt: {
       ar: "بنية بروتين مطوي محاطة بعقد شبكة عصبية",
       en: "A folded protein structure surrounded by neural-network nodes",

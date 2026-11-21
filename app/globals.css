@@ -56,6 +56,7 @@
   --animate-aurora: aurora 14s ease infinite;
   --animate-beam-spin: beam-spin 4s linear infinite;
   --animate-pulse-glow: pulse-glow 4.5s ease-in-out infinite;
+  --animate-shine: shine 5.5s ease-in-out infinite;
 }
 
 :root {
@@ -201,6 +202,23 @@
   }
 }
 
+/* A soft light sweep across frosted glass (Magic UI "shine border" idea). */
+@keyframes shine {
+  0%,
+  12% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+  28% {
+    opacity: 0.85;
+  }
+  55%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -277,6 +295,34 @@
     box-shadow:
       0 0 0 1px color-mix(in oklch, var(--brand) 25%, transparent),
       0 18px 60px -24px color-mix(in oklch, var(--brand) 55%, transparent);
+  }
+
+  /* Frosted-glass panel used over photography (Magic UI glass card pattern). */
+  .glass-panel {
+    background: linear-gradient(
+      135deg,
+      rgb(5 11 23 / 0.66),
+      rgb(8 16 31 / 0.42)
+    );
+    border: 1px solid color-mix(in oklch, white 28%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklch, white 30%, transparent),
+      inset 0 -1px 0 color-mix(in oklch, white 8%, transparent),
+      0 18px 50px -24px rgb(0 0 0 / 0.65);
+    /* Standard declaration last: the CSS minifier otherwise keeps only the
+       prefixed form, which modern Chromium does not recognise. */
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  /* The narrow moving highlight inside a glass panel. */
+  .glass-shine {
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      color-mix(in oklch, white 55%, transparent) 48%,
+      transparent 100%
+    );
   }
 
   .surface {

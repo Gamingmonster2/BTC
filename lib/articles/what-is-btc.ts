@@ -5,7 +5,7 @@ export const whatIsBtc: Article = {
   date: "2026-11-11",
   readingMinutes: 6,
   cover: {
-    src: "/art/hero.svg",
+    src: "/images/articles/what-is-btc.webp",
     alt: {
       ar: "لولب DNA يتحول إلى شبكة عصبية",
       en: "A DNA helix dissolving into a neural network",

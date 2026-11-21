@@ -13,6 +13,7 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArtImage } from "@/components/site/art-image";
+import { PhotoCover } from "@/components/site/photo-cover";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
@@ -300,14 +301,13 @@ export default async function HomePage() {
                     className="group block h-full overflow-hidden rounded-2xl border bg-card card-lift"
                   >
                     {article.cover && (
-                      <div className="aspect-[3/2] w-full overflow-hidden">
-                        <ArtImage
-                          src={article.cover.src}
-                          alt={article.cover.alt[locale]}
-                          sizes="(max-width: 768px) 100vw, 360px"
-                          className="transition-transform duration-500 group-hover:scale-[1.04]"
-                        />
-                      </div>
+                      <PhotoCover
+                        compact
+                        src={article.cover.src}
+                        alt={article.cover.alt[locale]}
+                        eyebrow={t("latestTitle")}
+                        sizes="(max-width: 768px) 100vw, 360px"
+                      />
                     )}
                     <div className="p-5">
                       <h3 className="text-sm font-medium leading-snug">

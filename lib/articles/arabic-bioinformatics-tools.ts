@@ -5,7 +5,7 @@ export const arabicBioinformaticsTools: Article = {
   date: "2026-11-12",
   readingMinutes: 5,
   cover: {
-    src: "/art/article-arabic.svg",
+    src: "/images/articles/arabic-bioinformatics-tools.webp",
     alt: {
       ar: "نجمة هندسية إسلامية تتشابك مع شبكة جزيئية",
       en: "An Islamic geometric star interlocking with a molecular lattice",

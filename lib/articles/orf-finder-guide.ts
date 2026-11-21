@@ -6,7 +6,7 @@ export const orfFinderGuide: Article = {
   readingMinutes: 6,
   tool: "orf-finder",
   cover: {
-    src: "/art/article-orf.svg",
+    src: "/images/articles/orf-finder-guide.webp",
     alt: {
       ar: "شريط من الكودونات يمر عبر آلة جزيئية تقرأه",
       en: "A tape of codons passing through a molecular reading machine",
