@@ -38,6 +38,20 @@ export const PUBLIC_ROUTES = [
   { path: "/sitemap", priority: 0.3, changeFrequency: "yearly" as const },
 ];
 
+/**
+ * Main image for each non-dynamic route, expressed as a public source path.
+ * Article and tool pages do not need an entry: `lib/metadata.ts` resolves
+ * their cover straight from the article data.
+ */
+export const PAGE_IMAGES: Record<string, string> = {
+  "/": "/images/articles/what-is-btc.webp",
+  "/learn": "/images/articles/bioinformatics-glossary.webp",
+  "/tools": "/images/articles/arabic-bioinformatics-tools.webp",
+  "/about": "/images/articles/protein-features-ai.webp",
+  "/contact": "/images/articles/what-is-btc.webp",
+  "/sitemap": "/images/articles/bioinformatics-glossary.webp",
+};
+
 /** Build an absolute URL for a locale + path pair. */
 export function localeUrl(locale: string, path: string): string {
   const suffix = path === "/" ? "" : path;

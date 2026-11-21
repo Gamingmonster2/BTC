@@ -13,6 +13,7 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArtImage } from "@/components/site/art-image";
+import { JsonLd } from "@/components/site/json-ld";
 import { PhotoCover } from "@/components/site/photo-cover";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { BorderBeam } from "@/components/magicui/border-beam";
@@ -24,6 +25,20 @@ import { NumberTicker } from "@/components/magicui/number-ticker";
 import { GridPattern } from "@/components/magicui/patterns";
 import { ARTICLES } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
+import { pageMetadata } from "@/lib/metadata";
+import { PAGE_IMAGES } from "@/lib/site";
+import { webPageJsonLd } from "@/lib/structured-data";
+
+export async function generateMetadata() {
+  const meta = await getTranslations("meta");
+  const base = await pageMetadata({
+    title: meta("title"),
+    description: meta("description"),
+    path: "/",
+  });
+  // The layout title template would otherwise repeat the site name.
+  return { ...base, title: { absolute: meta("title") } };
+}
 
 const FEATURE_ICONS = [FlaskConicalIcon, BookOpenIcon, SparklesIcon];
 const TOOL_ICONS = [DnaIcon, ThermometerIcon, ScanLineIcon, BrainCircuitIcon];
@@ -48,9 +63,17 @@ export default async function HomePage() {
   const steps = t.raw("howSteps") as StepEntry[];
   const keywords = t.raw("marquee") as string[];
   const latest = ARTICLES.slice(0, 3);
+  const jsonLd = webPageJsonLd({
+    title: t("title"),
+    description: t("subtitle"),
+    path: "/",
+    locale,
+    image: PAGE_IMAGES["/"],
+  });
 
   return (
     <div className="w-full">
+      <JsonLd data={jsonLd} />
       {/* ---------------------------------------------------------------- Hero */}
       <section className="relative isolate overflow-hidden">
         <div className="surface pointer-events-none absolute inset-0 -z-10">

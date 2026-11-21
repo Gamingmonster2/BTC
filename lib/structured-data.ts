@@ -1,4 +1,4 @@
-import type { ArticleLocale } from "@/lib/articles/types";
+import type { Article, ArticleLocale } from "@/lib/articles/types";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -37,6 +37,80 @@ export function softwareApplicationJsonLd({
       priceCurrency: "USD",
     },
     publisher: { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
+/** `WebPage` node that ties a page to the site-wide `WebSite` in the layout. */
+export function webPageJsonLd({
+  title,
+  description,
+  path,
+  locale,
+  image,
+}: {
+  title: string;
+  description: string;
+  /** Locale-free path, e.g. `/about` or `/learn/dna-vs-rna`. */
+  path: string;
+  locale: ArticleLocale;
+  image?: string;
+}) {
+  const url = `${SITE_URL}/${locale}${path === "/" ? "" : path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: title,
+    description,
+    inLanguage: locale,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    ...(image
+      ? {
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}${image}`,
+          },
+        }
+      : {}),
+  };
+}
+
+/** `Article` node for a Learn deep link, with its cover and canonical URL. */
+export function articleJsonLd({
+  article,
+  locale,
+  title,
+  description,
+}: {
+  article: Article;
+  locale: ArticleLocale;
+  title: string;
+  description: string;
+}) {
+  const url = `${SITE_URL}/${locale}/learn/${article.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: title,
+    description,
+    datePublished: article.date,
+    dateModified: article.date,
+    inLanguage: locale,
+    author: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    ...(article.cover
+      ? {
+          image: {
+            "@type": "ImageObject",
+            url: `${SITE_URL}${article.cover.src}`,
+            caption: article.cover.alt[locale],
+          },
+        }
+      : {}),
   };
 }
 

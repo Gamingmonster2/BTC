@@ -8,10 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { JsonLd } from "@/components/site/json-ld";
 import { PhotoCover } from "@/components/site/photo-cover";
 import { ARTICLES } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
+import { PAGE_IMAGES } from "@/lib/site";
+import { webPageJsonLd } from "@/lib/structured-data";
 
 export async function generateMetadata() {
   const t = await getTranslations("learn");
@@ -25,9 +28,17 @@ export async function generateMetadata() {
 export default async function LearnPage() {
   const t = await getTranslations("learn");
   const locale = (await getLocale()) as ArticleLocale;
+  const jsonLd = webPageJsonLd({
+    title: t("title"),
+    description: t("subtitle"),
+    path: "/learn",
+    locale,
+    image: PAGE_IMAGES["/learn"],
+  });
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6">
+      <JsonLd data={jsonLd} />
       <div className="text-center">
         <Badge variant="secondary" className="mb-4">
           {t("badge")}

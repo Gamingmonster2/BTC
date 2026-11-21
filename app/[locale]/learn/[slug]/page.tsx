@@ -6,11 +6,16 @@ import { ArrowLeftIcon, CalendarIcon, ClockIcon } from "lucide-react";
 import { ArticleBody } from "@/components/articles/article-body";
 import { PhotoCover } from "@/components/site/photo-cover";
 import { Comments } from "@/components/site/comments";
+import { JsonLd } from "@/components/site/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { ARTICLE_SLUGS, getArticle } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  articleJsonLd,
+  breadcrumbJsonLd,
+  webPageJsonLd,
+} from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -54,29 +59,33 @@ export default async function ArticlePage({ params }: PageProps) {
   const locale = (await getLocale()) as ArticleLocale;
   const content = article.content[locale] ?? article.content.ar;
   const t = await getTranslations("learn");
+  const nav = await getTranslations("nav");
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: content.title,
-    description: content.summary,
-    datePublished: article.date,
-    dateModified: article.date,
-    inLanguage: locale,
-    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-    publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-    mainEntityOfPage: `${SITE_URL}/${locale}/learn/${article.slug}`,
-    ...(article.cover ? { image: `${SITE_URL}${article.cover.src}` } : {}),
-  };
+  const path = `/learn/${article.slug}`;
+  const jsonLd = [
+    webPageJsonLd({
+      title: content.title,
+      description: content.summary,
+      path,
+      locale,
+      image: article.cover?.src,
+    }),
+    articleJsonLd({
+      article,
+      locale,
+      title: content.title,
+      description: content.summary,
+    }),
+    breadcrumbJsonLd([
+      { name: nav("home"), path: `/${locale}` },
+      { name: t("title"), path: `/${locale}/learn` },
+      { name: content.title, path: `/${locale}${path}` },
+    ]),
+  ];
 
   return (
     <article className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={jsonLd} />
 
       <Link
         href={`/${locale}/learn`}

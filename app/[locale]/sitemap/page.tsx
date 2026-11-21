@@ -2,10 +2,12 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowRightIcon, ExternalLinkIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/components/site/json-ld";
 import { ARTICLES } from "@/lib/articles";
 import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE_URL } from "@/lib/site";
+import { PAGE_IMAGES, SITE_URL } from "@/lib/site";
+import { webPageJsonLd } from "@/lib/structured-data";
 
 export async function generateMetadata() {
   const t = await getTranslations("sitemap");
@@ -59,8 +61,17 @@ export default async function SitemapPage() {
     { key: "articles", entries: articles },
   ] as const;
 
+  const jsonLd = webPageJsonLd({
+    title: t("title"),
+    description: t("subtitle"),
+    path: "/sitemap",
+    locale,
+    image: PAGE_IMAGES["/sitemap"],
+  });
+
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+      <JsonLd data={jsonLd} />
       <Badge variant="secondary" className="mb-4">
         {t("badge")}
       </Badge>

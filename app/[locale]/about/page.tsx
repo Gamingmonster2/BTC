@@ -1,5 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { EyeIcon, ScaleIcon, TargetIcon, BadgeCheckIcon } from "lucide-react";
+import { JsonLd } from "@/components/site/json-ld";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -8,6 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { pageMetadata } from "@/lib/metadata";
+import { PAGE_IMAGES } from "@/lib/site";
+import { webPageJsonLd } from "@/lib/structured-data";
+import type { ArticleLocale } from "@/lib/articles/types";
 
 export async function generateMetadata() {
   const t = await getTranslations("about");
@@ -20,9 +24,18 @@ export async function generateMetadata() {
 
 export default async function AboutPage() {
   const t = await getTranslations("about");
+  const locale = (await getLocale()) as ArticleLocale;
+  const jsonLd = webPageJsonLd({
+    title: t("title"),
+    description: t("intro"),
+    path: "/about",
+    locale,
+    image: PAGE_IMAGES["/about"],
+  });
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6">
+      <JsonLd data={jsonLd} />
       <div className="text-center">
         <Badge variant="outline" className="mb-4">
           {t("badge")}

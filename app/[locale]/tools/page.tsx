@@ -15,8 +15,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { JsonLd } from "@/components/site/json-ld";
+import type { ArticleLocale } from "@/lib/articles/types";
 import { pageMetadata } from "@/lib/metadata";
-import { SITE_URL } from "@/lib/site";
+import { PAGE_IMAGES, SITE_URL } from "@/lib/site";
+import { webPageJsonLd } from "@/lib/structured-data";
 
 type ToolEntry = { name: string; description: string; href: string };
 
@@ -34,21 +36,30 @@ export async function generateMetadata() {
 export default async function ToolsPage() {
   const t = await getTranslations("tools");
   const common = await getTranslations("common");
-  const locale = await getLocale();
+  const locale = (await getLocale()) as ArticleLocale;
 
   const list = t.raw("list") as ToolEntry[];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: t("title"),
-    itemListElement: list.map((tool, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: tool.name,
-      url: `${SITE_URL}/${locale}${tool.href}`,
-    })),
-  };
+  const jsonLd = [
+    webPageJsonLd({
+      title: t("title"),
+      description: t("subtitle"),
+      path: "/tools",
+      locale,
+      image: PAGE_IMAGES["/tools"],
+    }),
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: t("title"),
+      itemListElement: list.map((tool, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: tool.name,
+        url: `${SITE_URL}/${locale}${tool.href}`,
+      })),
+    },
+  ];
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6">
